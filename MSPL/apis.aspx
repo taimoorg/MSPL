@@ -1,10 +1,10 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="new.aspx.vb" Inherits="MSPL._new" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="apis.aspx.vb" Inherits="MSPL.apis" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> new page</title>
+    <title></title>
 </head>
 <body>
     <form id="form1" runat="server">

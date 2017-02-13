@@ -12,7 +12,7 @@ Option Explicit On
 
 
 
-Partial Public Class _new
+Partial Public Class apis
 
     '''<summary>
     '''form1 control.
