@@ -93,22 +93,13 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="apis.aspx" />
     <Content Include="department.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="insert.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="apis.aspx.designer.vb">
-      <DependentUpon>apis.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="apis.aspx.vb">
-      <DependentUpon>apis.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Classes\DB Operation\DepartmentDataProvider.vb" />
     <Compile Include="department.aspx.designer.vb">
       <DependentUpon>department.aspx</DependentUpon>
@@ -121,13 +112,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Info\DepartmentInfo.vb" />
-    <Compile Include="insert.aspx.designer.vb">
-      <DependentUpon>insert.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="insert.aspx.vb">
-      <DependentUpon>insert.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
