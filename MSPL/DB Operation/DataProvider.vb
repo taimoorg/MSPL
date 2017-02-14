@@ -26,4 +26,8 @@ Public Class DataProvider
         objDatabase.ExecuteNonQuery("P_Department_Delete", DEPT_ID)
     End Sub
 
+    Public Shared Function P_Department_GetBy_Name(Name As String) As DataTable
+
+    End Function
+
 End Class
