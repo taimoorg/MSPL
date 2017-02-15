@@ -128,9 +128,6 @@
                         <ItemStyle Width="100px"></ItemStyle>
                            </asp:TemplateField>
 
-                        
-               
-
                     <asp:TemplateField HeaderText="Delete" ItemStyle-Width="100px" HeaderStyle-HorizontalAlign="Left">
                         <ItemTemplate> <asp:LinkButton Text="Delete" ID="lnkDel" runat="server" /> </ItemTemplate>
                           <HeaderStyle HorizontalAlign="Left"></HeaderStyle>   
@@ -161,9 +158,6 @@
                 <input id="txtName" type="text" />
                
             </div>
-
-
-
         </div>
     </form>
 </body>

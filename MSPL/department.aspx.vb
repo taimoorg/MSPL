@@ -7,7 +7,7 @@
     Private Sub FillGrid()
         Dim DT As DataTable
 
-        DT = DepartmentDataProvider.P_Department_GetAll
+        DT = DataProvider.P_Department_GetAll
 
         'studentTable.DataBind()
 
