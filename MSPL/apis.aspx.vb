@@ -1,38 +1,63 @@
 ﻿Imports System.Web.Services
-
-
 Public Class apis
     Inherits System.Web.UI.Page
 
+    <WebMethod()> _
+    Public Shared Function P_Department_IU(DEPT_ID As Integer, Name As String) As Integer
+        Return DataProvider.P_Department_IU(New DepartmentInfo(DEPT_ID, Name))
+    End Function
+    <WebMethod()> _
+    Public Shared Function P_Department_Delete(DEPT_ID As Integer) As Integer
+        DataProvider.P_Department_Delete(DEPT_ID)
+        Return 1
+    End Function
 
-    Public Class apis
-        Inherits System.Web.UI.Page
+    <WebMethod()> _
+    Public Shared Function P_Department_GetBy_Id(DEPT_ID As Integer) As DepartmentInfo
+        Dim Ret As New DepartmentInfo
+        Dim DR As DataRow
+        DR = DataProvider.P_Department_GetBy_Id(DEPT_ID)
+        With Ret
+            .DEPT_ID = DR.Item("DEPT_ID")
+            .Name = DR.Item("Name")
+        End With
+        Return Ret
 
-        <WebMethod()> _
-        Public Shared Function P_Department_Delete(DEPT_ID As Integer) As Integer
-            DepartmentDataProvider.P_Department_Delete(DEPT_ID)
+    End Function
 
-            Return 1
-        End Function
+    <WebMethod()> _
+    Public Shared Function GetDeptTable() As String
+        Dim dt As DataTable
+        dt = DataProvider.P_Department_GetAll()
+        Return GetHtmlTable(dt)
 
-        <WebMethod()> _
-        Public Shared Function P_Department_IU(DEPT_ID As Integer, Name As String) As Integer
-            Return DepartmentDataProvider.P_Department_IU(New DepartmentInfo(DEPT_ID, Name))
+    End Function
+    Private Shared Function GethtmlTable(dt As DataTable) As String
+        Dim htmlTable As New StringBuilder()
+        htmlTable.Append("<table border='1' cellpadding=5 cellspacing=0 width=40% align='center'>")
+        htmlTable.Append("<tr>")
+        'htmlTable.Append("<th width=20% align='left'> Department ID </th>")
+        htmlTable.Append("<th align='left'>Name </th>")
+        htmlTable.Append("<th align='left'> Edit </th>")
+        htmlTable.Append("<th align='left'>Delete </th>")
 
-        End Function
+        htmlTable.Append("</tr>")
 
-        <WebMethod()> _
-        Public Shared Function P_Department_GetBy_Id(DEPT_ID As Integer) As DepartmentInfo
-            Dim Ret As New DepartmentInfo
-            Dim DR As DataRow
-            DR = DepartmentDataProvider.P_Department_GetBy_Id(DEPT_ID)
-            With Ret
-                .DEPT_ID = DR.Item("DEPT_ID")
-                .Name = DR.Item("Name")
-            End With
-            Return Ret
+        For i As Integer = 0 To dt.Rows.Count - 1
 
-        End Function
-    End Class
+            htmlTable.Append("<tr>")
+            'htmlTable.Append(String.Format("<td>{0}</td>", dt.Rows(i)("DEPT_ID")))
+            htmlTable.Append(String.Format("<td>{0}</td>", dt.Rows(i)("Name")))
+
+            htmlTable.Append(String.Format("<td><a href='javascript:OpenDialog({0});'</a> Edit</td>", dt.Rows(i)("DEPT_ID")))
+            htmlTable.Append(String.Format("<td><a href='javascript:Del_Record({0});'style ='color:#CC0000'>Delete</a></td>", dt.Rows(i)("DEPT_ID")))
+
+            htmlTable.Append("</tr>")
+        Next
+        htmlTable.Append("</table>")
+        Return htmlTable.ToString()
+
+    End Function
 
 End Class
+
