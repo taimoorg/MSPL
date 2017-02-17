@@ -128,7 +128,7 @@
             $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_GetBy_Name",
-                data: '{Name: "' + $("#textbox").val() + '",sOptions:"' + $("#ddlName").val() + '"}',
+                data: '{Name: "' + $("#textbox").val() + '",sOptions:"' + $("#ddlName").val() + '",Last_Name:"' + $("#textbox1").val() + '",nOption:"' + $("#ddlLName").val() + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
@@ -166,6 +166,18 @@
 
             <input id="textbox" type="text" />
             &nbsp;&nbsp;&nbsp;&nbsp;
+
+             <label>Last Name:</label>
+            &nbsp;
+           
+            <select id="ddlLName">
+                <option value="1">Starting with </option>
+                <option value="2">containing </option>
+                <option value="3">Ending with </option>
+            </select>
+
+            <input id="textbox1" type="text" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <input id="Button1" type="button" value="Filter" onclick="NameSearch()" />
         </div>
 
@@ -186,9 +198,6 @@
 
         </div>
         <br />
-
-
-
 
 
     </form>
