@@ -3,14 +3,22 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         FillGrid()
+        FillDropDownList()
+    End Sub
+    Private Sub FillDropDownList()
+        Dim dt As DataTable
+        dt = DataProvider.P_Department_GetAll
+        ddlDepartments.DataSource = dt
+        'ddlDepartments.DataTextField = "Name"
+        ddlDepartments.DataValueField = "DEPT_ID"
+        ddlDepartments.DataBind()
+        ddlDepartments.Items.Insert(0, New ListItem("--Select Department--", "-1"))
+       
     End Sub
     Private Sub FillGrid()
         Dim DT As DataTable
 
         DT = DataProvider.P_Department_GetAll
-
-        'studentTable.DataBind()
-
         GridView1.DataSource = DT
         GridView1.DataBind()
 

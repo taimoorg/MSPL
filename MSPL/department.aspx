@@ -114,10 +114,13 @@
 
                 <Columns>
 
-                    <asp:BoundField DataField="Name" HeaderStyle-HorizontalAlign="Left" HeaderText="Name" ItemStyle-HorizontalAlign="Left" SortExpression="Name" ItemStyle-Width="800px">
-
+                    <asp:BoundField DataField="DEPT_ID" HeaderStyle-HorizontalAlign="Left" HeaderText="DEPT_ID" ItemStyle-HorizontalAlign="Left" SortExpression="DEPT_ID" ItemStyle-Width="80px">
                         <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
+                        <ItemStyle HorizontalAlign="Left" Width="80px"></ItemStyle>
+                    </asp:BoundField>
 
+                    <asp:BoundField DataField="Name" HeaderStyle-HorizontalAlign="Left" HeaderText="Name" ItemStyle-HorizontalAlign="Left" SortExpression="Name" ItemStyle-Width="80px">
+                        <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
                         <ItemStyle HorizontalAlign="Left" Width="800px"></ItemStyle>
                     </asp:BoundField>
 
@@ -158,6 +161,18 @@
                 <input id="txtName" type="text" />
                
             </div>
+
+            <br />
+            <br />
+            <div>
+                <fieldset style="width: 400px; height :40px;">
+                    <legend> DropDownList</legend>
+                    Select Department ID: &nbsp;
+                    <asp:DropDownList ID="ddlDepartments" runat="server" Width="160px" />
+                </fieldset>
+            </div>
+            <br />
+        </div>
         </div>
     </form>
 </body>
