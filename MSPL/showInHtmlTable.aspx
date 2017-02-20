@@ -56,7 +56,7 @@
             $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_IU",
-                data: '{DEPT_ID: ' + $("#id").html() + ',Name:"' + $("#txtName").val() + '",Last_Name:"' + $("#txtLName").val() + '"}',
+                data: '{DEPT_ID: ' + $("#id").html() + ',Dept_Name:"' + $("#txtName").val() + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
@@ -87,8 +87,8 @@
                 success: function (response) {
                     $('#overlay').hide();
                     $("#id").html(response.d.DEPT_ID);
-                    $("#txtName").val(response.d.Name);
-                    $("#txtLName").val(response.d.Last_Name);
+                    $("#txtName").val(response.d.Dept_Name);
+                  
                     editdialog.dialog("open");
                 },
                 failure: function (response) {
@@ -106,8 +106,7 @@
 
             $("#id").html(0);
             $("#txtName").val("");
-            $("#txtLName").val("");
-
+         
             editdialog.dialog("open");
         }
 
@@ -128,7 +127,7 @@
             $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_GetBy_Name",
-                data: '{Name: "' + $("#textbox").val() + '",sOptions:"' + $("#ddlName").val() + '",Last_Name:"' + $("#textbox1").val() + '",nOption:"' + $("#ddlLName").val() + '"}',
+                data: '{Dept_Name: "' + $("#textbox").val() + '",sOptions:"' + $("#ddlName").val() + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
@@ -143,8 +142,9 @@
                     $('#overlay').hide();
                     alert(response.d);
                 }
-             });
+            });
         }
+
 
 
     </script>
@@ -153,9 +153,10 @@
 <body>
     <form id="form1" runat="server">
 
+        <br />
         <div style="padding: 10px">
 
-            <label>Name:</label>
+            <label>Department Name:</label>
             &nbsp;
            
             <select id="ddlName">
@@ -167,22 +168,11 @@
             <input id="textbox" type="text" />
             &nbsp;&nbsp;&nbsp;&nbsp;
 
-             <label>Last Name:</label>
-            &nbsp;
-           
-            <select id="ddlLName">
-                <option value="1">Starting with </option>
-                <option value="2">containing </option>
-                <option value="3">Ending with </option>
-            </select>
-
-            <input id="textbox1" type="text" />
-            &nbsp;&nbsp;&nbsp;&nbsp;
             <input id="Button1" type="button" value="Filter" onclick="NameSearch()" />
         </div>
 
         <div>
-            <button class="btn" type="button" onclick="AddNewDept();return false;">NEW Name</button>
+            <button class="btn" type="button" onclick="AddNewDept();return false;"> Department Name</button>
         </div>
         <br />
 
@@ -191,11 +181,9 @@
         <div id="dialog" style="display: none">
             <b>Id:</b> <span id="id"></span>
             <br />
-            <b>Name:</b>
+            <b>Department Name:</b>
             <input id="txtName" type="text" />
-            <b>Last Name:</b>
-            <input id="txtLName" type="text" />
-
+           
         </div>
         <br />
 

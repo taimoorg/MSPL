@@ -52,8 +52,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:Panel ID="Panel1" runat="server">
-        <div>
-            <div>
+             <div>
                 <fieldset style="width: 300px; height: 40px;">
                     <legend>Populate DropDownList</legend>
                     Select Department:
@@ -61,8 +60,6 @@
                 </fieldset>
             </div>
             <br />
-   
-            </div> 
             </asp:Panel>
     </form>
 </body>

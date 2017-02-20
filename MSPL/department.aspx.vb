@@ -9,13 +9,13 @@
         Dim dt As DataTable
         dt = DataProvider.P_Department_GetAll
         ddlDepartments.DataSource = dt
-        'ddlDepartments.DataTextField = "Name"
-        ddlDepartments.DataValueField = "DEPT_ID"
+        ddlDepartments.DataTextField = "Name"
+        ddlDepartments.DataValueField = "Name"
         ddlDepartments.DataBind()
-        ddlDepartments.Items.Insert(0, New ListItem("--Select Department--", "-1"))
-       
+
     End Sub
     Private Sub FillGrid()
+
         Dim DT As DataTable
 
         DT = DataProvider.P_Department_GetAll
@@ -47,5 +47,5 @@
             LbDel.Visible = True
         End If
     End Sub
-  
+
 End Class

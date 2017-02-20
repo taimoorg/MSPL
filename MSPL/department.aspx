@@ -36,7 +36,7 @@
                $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_IU",
-                data: '{DEPT_ID: ' + $("#id").html() + ',Name:"' + $("#txtName").val() + '"}',
+                data: '{DEPT_ID: ' + $("#id").html() + ',Name:"' + $("#txtName").val() + '",Last_Name:"' + $("#txtLName").val() + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
@@ -168,7 +168,7 @@
                 <fieldset style="width: 400px; height :40px;">
                     <legend> DropDownList</legend>
                     Select Department ID: &nbsp;
-                    <asp:DropDownList ID="ddlDepartments" runat="server" Width="160px" />
+                    <asp:DropDownList ID="ddlDepartments" runat="server" Width="180px" />
                 </fieldset>
             </div>
             <br />
