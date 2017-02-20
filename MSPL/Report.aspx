@@ -35,7 +35,7 @@
                           Result = Result.d;
                           $.each(Result, function (key, value) {
                               $("#ddlDepartments").append($("<option></option>").val
-                              (value.DEPT_ID).html(value.Name));
+                              (value.DEPT_ID).html(value.Dept_Name));
 
                           });
 
