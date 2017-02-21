@@ -19,6 +19,7 @@
                 FillEmp();
             });
         });
+
         function FillEmp()
         {
             alert($("[id$=ddlDepartments]").val());
@@ -29,16 +30,13 @@
                       contentType: "application/json; charset=utf-8",
                       url: "apis.aspx/PopulateDropDownList",
                       data: "{}",
-
                       dataType: "json",
                       success: function (Result) {
                           Result = Result.d;
                           $.each(Result, function (key, value) {
-                              $("#ddlDepartments").append($("<option></option>").val
+                              $("[id$=ddlDepartments]").append($("<option></option>").val
                               (value.DEPT_ID).html(value.Dept_Name));
-
                           });
-
                       },
                       error: function (Result) {
                           alert("Error");
@@ -64,3 +62,5 @@
     </form>
 </body>
 </html>
+
+
