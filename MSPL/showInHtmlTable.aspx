@@ -9,14 +9,17 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css" rel="stylesheet" type="text/css" />
 
+ 
     <title></title>
-    <script type="text/javascript">
+ 
+       <script type="text/javascript">
 
         var editdialog
         $(document).ready(function () {
             SetDialog();
             FillTable();
         });
+
         function FillTable() {
             $.ajax({
                 type: "Post",
@@ -26,7 +29,6 @@
                 beforeSend: function () { $('#overlay').show(); },
                 success: function (response) {
                     $("#Gettbl").html(response.d);
-
                 },
                 failure: function (response) {
                     $('#overlay').hide();
@@ -38,6 +40,7 @@
                 }
             });
         }
+
         function SetDialog() {
             editdialog = $("#dialog").dialog({
                 autoOpen: false,
@@ -178,6 +181,7 @@
 
         <div id="Gettbl"></div>
         <br />
+
         <div id="dialog" style="display: none">
             <b>Id:</b> <span id="id"></span>
             <br />
