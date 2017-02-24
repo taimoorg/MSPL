@@ -42,4 +42,5 @@ Public Class DataProvider
 
         Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Name", Dept_Name), DataSet).Tables(0)
     End Function
+
 End Class
