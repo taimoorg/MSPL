@@ -6,7 +6,7 @@ Public Class EmpolyeeDataProvider
     Public Shared Function P_Empolyee_IU(obj As EmpolyeeInfo) As Integer
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
-        Return CType(objDatabase.ExecuteDataSet("P_Empolyee_IU", obj.Emp_ID, obj.Emp_Name, obj.Emp_Address, obj.DEPT_ID), DataSet).Tables(0).Rows(0).Item(0)
+        Return CType(objDatabase.ExecuteDataSet("P_Empolyee_IU", obj.Emp_ID, obj.Emp_Name, obj.Emp_Address, obj.DEPT_ID, obj.Hire_Date, obj.Emp_Shift), DataSet).Tables(0).Rows(0).Item(0)
     End Function
 
     Public Shared Function P_Empolyee_GetAll() As DataTable
