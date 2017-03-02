@@ -36,7 +36,7 @@
                $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_IU",
-                data: '{DEPT_ID: ' + $("#id").html() + ',Name:"' + $("#txtName").val() + '",Last_Name:"' + $("#txtLName").val() + '"}',
+                data: '{DEPT_ID: ' + $("#id").html() + ',Dept_Name:"' + $("#txtName").val() + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
@@ -58,7 +58,7 @@
         function AddNewDept()
         {
             $("#id").html(0);
-            $("#Name").val("");
+            $("#Dept_Name").val("");
 
             editdialog.dialog("open");
         }
@@ -85,7 +85,7 @@
                 success: function (response) {
                     $('#overlay').hide();
                     $("#id").html(response.d.DEPT_ID);
-                    $("#txtName").val(response.d.Name);
+                    $("#txtName").val(response.d.Dept_Name);
                     editdialog.dialog("open");
                 },
                 failure: function (response) {
@@ -119,7 +119,7 @@
                         <ItemStyle HorizontalAlign="Left" Width="80px"></ItemStyle>
                     </asp:BoundField>
 
-                    <asp:BoundField DataField="Name" HeaderStyle-HorizontalAlign="Left" HeaderText="Name" ItemStyle-HorizontalAlign="Left" SortExpression="Name" ItemStyle-Width="80px">
+                    <asp:BoundField DataField="Dept_Name" HeaderStyle-HorizontalAlign="Left" HeaderText="Name" ItemStyle-HorizontalAlign="Left" SortExpression="Dept_Name" ItemStyle-Width="80px">
                         <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
                         <ItemStyle HorizontalAlign="Left" Width="800px"></ItemStyle>
                     </asp:BoundField>

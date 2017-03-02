@@ -9,8 +9,8 @@
         Dim dt As DataTable
         dt = DataProvider.P_Department_GetAll
         ddlDepartments.DataSource = dt
-        ddlDepartments.DataTextField = "Name"
-        ddlDepartments.DataValueField = "Name"
+        ddlDepartments.DataTextField = "Dept_Name"
+        ddlDepartments.DataValueField = "Dept_Name"
         ddlDepartments.DataBind()
 
     End Sub
