@@ -6,11 +6,13 @@ Public Class apis
     Public Shared Function P_Department_IU(DEPT_ID As Integer, Dept_Name As String) As Integer
         Return DataProvider.P_Department_IU(New DepartmentInfo(DEPT_ID, Dept_Name))
     End Function
+
     <WebMethod()> _
     Public Shared Function P_Department_Delete(DEPT_ID As Integer) As Integer
         DataProvider.P_Department_Delete(DEPT_ID)
         Return 1
     End Function
+
     <WebMethod()> _
     Public Shared Function P_Department_GetBy_Name(Dept_Name As String, sOptions As Integer) As String
         Dim dt As DataTable
@@ -18,21 +20,6 @@ Public Class apis
         Return GethtmlTable(dt)
 
     End Function
-
-
-    '<WebMethod()> _
-    'Public Shared Function P_Department_GetBy_Id(DEPT_ID As Integer) As DepartmentInfo
-    '    Dim Ret As New DepartmentInfo
-    '    Dim DR As DataRow
-    '    DR = DataProvider.P_Department_GetBy_Id(DEPT_ID)
-    '    With Ret
-    '        .DEPT_ID = DR.Item("DEPT_ID")
-    '        .Name = DR.Item("Name")
-    '        .Last_Name = DR.Item("Last_Name")
-    '    End With
-    '    Return Ret
-
-    'End Function
 
     <WebMethod()> _
     Public Shared Function GetDeptTable() As String
@@ -83,7 +70,6 @@ Public Class apis
 
     End Function
 
-
     <WebMethod()> _
     Public Shared Function PopulateDropDownList() As List(Of DepartmentInfo)
         Dim dt As DataTable
@@ -101,6 +87,23 @@ Public Class apis
         Return objDept
 
     End Function
+
+    <WebMethod()> _
+    Public Shared Function EmpDropDownList(DEPT_ID As Integer) As List(Of EmpolyeeInfo)
+        Dim dt As DataTable
+        Dim objEmp As New List(Of EmpolyeeInfo)()
+        dt = EmpolyeeDataProvider.P_Emp_GetBy_Dept(DEPT_ID)
+        If dt.Rows.Count > 0 Then
+            For i As Integer = 0 To dt.Rows.Count - 1
+                objEmp.Add(New EmpolyeeInfo() With { _
+                             .Emp_ID = Convert.ToInt32(dt.Rows(i)("Emp_ID")), _
+                             .Emp_Name = dt.Rows(i)("Emp_Name").ToString() _
+                         })
+            Next
+        End If
+        Return objEmp
+    End Function
+
 End Class
 
 
