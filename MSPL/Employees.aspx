@@ -17,17 +17,49 @@
             SetDialog();
             FillEmpTable();
             DropDownList();
-            CityAutoComplete();
+            AutoComplete();
 
             // OUTER DROP DOWN LIST
             DropDown();
             $("[id$=ddl]").change(function () {
                 DllEmp();
             });
+
+            // AUTO COMPLETE
+            AutoComplete();
+            $("[id$=txtSearch]").click(function () {
+                var department = ($("[id$=txtSearch]").val());
+                TextSearch(department);
+            });
+
         });
 
+        function TextSearch(string) {
+          //  alert(($("[id$=txtSearch]").val()));
+            $.ajax({
+                type: "Post",
+                url: "apisEmployee.aspx/P_Department_AutoComplete",
+                data: '{Dept_Name:"' + string + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () { $('#overlay').show(); },
+                success: function (response) {
+                    $("#Gettbl").html(response.d);
+                },
+                failure: function (response) {
+                    $('#overlay').hide();
+                    alert(response.d);
+                },
+                error: function (response) {
+                    $('#overlay').hide();
+                    alert(response.d);
+                }
+            });
+        }
+
+
         function DllEmp() {
-            // alert($("[id$=ddl]").val()); [ IN THIS WAY WE CAN USE THE ID OF DROP DOWN LIST ]
+           //  alert($("[id$=ddl]").val());        //[ IN THIS WAY WE CAN USE THE ID OF DROP DOWN LIST ]
             $.ajax({
                 type: "Post",
                 url: "apisEmployee.aspx/P_Emp_GetBy_Dept",
@@ -47,8 +79,8 @@
                     alert(response.d);
                 }
             });
-
         }
+
         // INNER DROP DOWN LIST
         function DropDownList() {
             $.ajax({
@@ -209,12 +241,12 @@
 
         //AutoComplete Search With Department
 
-        function CityAutoComplete() {
-            $("#<%=txtSearchCity.ClientID %>").autocomplete({
-                  autoFocus: true,
-                  source: function (request, response) {
-                      $.ajax({
-                          url: "apisEmployee.aspx/AutoComplete",
+        function AutoComplete() {
+            $("#<%=txtSearch.ClientID %>").autocomplete({
+                autoFocus: true,
+                source: function (request, response) {
+                    $.ajax({
+                        url: "apisEmployee.aspx/AutoComplete",
                         data: "{'SearchText': '" + request.term + "'}",
                         dataType: "json",
                         type: "POST",
@@ -235,7 +267,7 @@
                     });
                 },
                 //minLength to specify after how many characters input call for suggestions to be made.
-                minLength: 1,
+                minLength: 0,
             });
         }
 
@@ -245,16 +277,24 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <div>
+         <%--   <div>
                 <b>Search By Department:</b>
                 <asp:DropDownList ID="ddl" runat="server" Width="160px" />
-            </div>
+            </div>--%>
             <br />
-            <b>AutoComplete</b>
+
+            <%--   <b>AutoComplete</b>
             <div id="dvSearch">
                 <asp:TextBox ID="txtSearchCity" CssClass="searchbox" placeholder="Search by Department" runat="server"></asp:TextBox>
             </div>
+            <br />--%>
+
+            <b>AutoComplete</b>
+            <div>
+                <asp:TextBox ID="txtSearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+            </div>
             <br />
+
             <div>
                 <button id="btn" type="button" onclick="AddNewEmp();return false;">Add Employee </button>
             </div>

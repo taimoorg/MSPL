@@ -48,4 +48,9 @@ Public Class DataProvider
         objDatabase = DatabaseFactory.CreateDatabase()
         Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Name", Dept_Name), DataSet).Tables(0)
     End Function
+    Public Shared Function P_Department_GetBy_Name(Dept_Name As String) As DataTable
+        Dim objDatabase As Database
+        objDatabase = DatabaseFactory.CreateDatabase()
+        Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Name", Dept_Name), DataSet).Tables(0)
+    End Function
 End Class
