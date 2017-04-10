@@ -147,13 +147,12 @@
                 }
             });
         }
-
-
-
+        
     </script>
 
 </head>
 <body>
+    
     <form id="form1" runat="server">
 
         <br />
@@ -179,8 +178,9 @@
         </div>
         <br />
 
-        <div id="Gettbl"></div>
-        <br />
+                <div id="Gettbl"></div>
+        
+            <br />
 
         <div id="dialog" style="display: none">
             <b>Id:</b> <span id="id"></span>
@@ -189,7 +189,7 @@
             <input id="txtName" type="text" />
            
         </div>
-        <br />
+
     </form>
 </body>
 </html>

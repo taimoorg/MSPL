@@ -32,6 +32,15 @@ Partial Public Class Employees
     Protected WithEvents ddl As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''txtSearchCity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSearchCity As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''ddlDepartments control.
     '''</summary>
     '''<remarks>

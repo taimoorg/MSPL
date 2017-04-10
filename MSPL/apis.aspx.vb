@@ -22,6 +22,14 @@ Public Class apis
     End Function
 
     <WebMethod()> _
+    Public Shared Function P_AutoSearch_GetBy_Name(Dept_Name As String) As String
+        Dim dt As DataTable
+        dt = DataProvider.P_AutoSearch_GetBy_Name(Dept_Name)
+        Return GethtmlTable(dt)
+
+    End Function
+
+    <WebMethod()> _
     Public Shared Function GetDeptTable() As String
         Dim dt As DataTable
         dt = DataProvider.P_Department_GetAll()

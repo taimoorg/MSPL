@@ -85,6 +85,7 @@
              });
          }
 
+     
 
      </script>
 </head>
@@ -100,7 +101,7 @@
         <b>Employee</b>
                 <asp:DropDownList ID="ddlEmp" runat="server" Width="160px" />
     
-    </div>
+    
     </form>
 </body>
 </html>
