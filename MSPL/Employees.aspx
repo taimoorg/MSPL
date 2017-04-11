@@ -27,19 +27,20 @@
 
             // AUTO COMPLETE
             AutoComplete();
-            $("[id$=txtSearch]").click(function () {
-                var department = ($("[id$=txtSearch]").val());
-                TextSearch(department);
+            $("[id$=txtSearch]").select(function () {
+               // var department = ($("[id$=txtSearch]").val());
+              // TextSearch(department);
+                TextSearch();
             });
 
         });
 
-        function TextSearch(string) {
+        function TextSearch() {
           //  alert(($("[id$=txtSearch]").val()));
             $.ajax({
                 type: "Post",
-                url: "apisEmployee.aspx/P_Department_AutoComplete",
-                data: '{Dept_Name:"' + string + '"}',
+                url: "apisEmployee.aspx/P_Department_AutoSearch",
+                data: '{Dept_Name:"' +($("[id$=txtSearch]").val()) + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 beforeSend: function () { $('#overlay').show(); },
