@@ -17,7 +17,6 @@
             SetDialog();
             FillEmpTable();
             DropDownList();
-            AutoComplete();
 
             // OUTER DROP DOWN LIST
             DropDown();
@@ -225,8 +224,14 @@
                     $("#txtAddress").val(response.d.Emp_Address); // RETURNED THE SAME RECORD WHICH WAS INSERTED AT NEW EMPLOYEE
                     $("#ddlDepartments").val(response.d.DEPT_ID);
                     $("#ddlShift").val(response.d.Emp_Shift);
-                    $("#datepicker").val(response.d.Hire_Date).datepicker();
-
+                    //$("#datepicker").val(response.d.Hire_Date).datepicker();
+                    //$("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' }).val(response.d.Hire_Date);
+                    $('#datepicker').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        showButtonPanel: true,
+                        dateFormat: 'yy-mm-dd'
+                    }).val(response.d.Hire_Date);
                     editdialog.dialog("open");
                 },
                 failure: function (response) {
@@ -278,17 +283,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
-         <%--   <div>
+            <div>
                 <b>Search By Department:</b>
                 <asp:DropDownList ID="ddl" runat="server" Width="160px" />
-            </div>--%>
-            <br />
-
-            <%--   <b>AutoComplete</b>
-            <div id="dvSearch">
-                <asp:TextBox ID="txtSearchCity" CssClass="searchbox" placeholder="Search by Department" runat="server"></asp:TextBox>
             </div>
-            <br />--%>
+            <br />
 
             <b>AutoComplete</b>
             <div>

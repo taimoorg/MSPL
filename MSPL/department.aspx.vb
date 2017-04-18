@@ -3,17 +3,17 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         FillGrid()
-        FillDropDownList()
+        'FillDropDownList()
     End Sub
-    Private Sub FillDropDownList()
-        Dim dt As DataTable
-        dt = DataProvider.P_Department_GetAll
-        ddlDepartments.DataSource = dt
-        ddlDepartments.DataTextField = "Dept_Name"
-        ddlDepartments.DataValueField = "Dept_Name"
-        ddlDepartments.DataBind()
+    'Private Sub FillDropDownList()
+    '    Dim dt As DataTable
+    '    dt = DataProvider.P_Department_GetAll
+    '    ddlDepartments.DataSource = dt
+    '    ddlDepartments.DataTextField = "Dept_Name"
+    '    ddlDepartments.DataValueField = "Dept_Name"
+    '    ddlDepartments.DataBind()
 
-    End Sub
+    'End Sub
     Private Sub FillGrid()
 
         Dim DT As DataTable
@@ -27,6 +27,7 @@
         'A.Name = "fdfd"
         'DepartmentDataProvider.P_Department_IU(A)
     End Sub
+
 
     Private Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles GridView1.RowDataBound
         If (e.Row.RowType = DataControlRowType.DataRow) Then
@@ -48,4 +49,8 @@
         End If
     End Sub
 
+    Protected Sub GridView1_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles GridView1.PageIndexChanging
+        GridView1.PageIndex = e.NewPageIndex
+        Me.FillGrid()
+    End Sub
 End Class

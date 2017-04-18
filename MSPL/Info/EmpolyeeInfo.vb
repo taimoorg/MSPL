@@ -12,7 +12,7 @@ Public Class EmpolyeeInfo
 
     End Sub
 
-    Sub New(EmpId As Integer, EmpName As String, EmpAddress As String, DeptId As Integer, Hiredate As String, shift As String, EmpSalary As String)
+    Sub New(EmpId As Integer, EmpName As String, EmpAddress As String, DeptId As Integer, Hiredate As string, shift As String, EmpSalary As String)
 
         Emp_ID = EmpId
         Emp_Name = EmpName

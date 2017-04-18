@@ -15,6 +15,10 @@
         var editdialog
         $(document).ready(function () {
             SetDialog();
+            AutoComplete();
+            $("[id$=txtSearch]").select(function () {
+                TextSearch();
+            });
         });
 
         function SetDialog() {
@@ -99,17 +103,89 @@
             });
         }
 
+        function AutoComplete() {
+            $("#<%=txtSearch.ClientID %>").autocomplete({
+                        autoFocus: true,
+                        source: function (request, response) {
+                            $.ajax({
+                                url: "apis.aspx/AutoSearch",
+                                data: "{'SearchText': '" + request.term + "'}",
+                                dataType: "json",
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    response($.map(data.d, function (item) {
+                                        return {
+                                            label: item
+                                        }
+                                    }))
+                                },
+                                error: function (response) {
+                                    alert(response.responseText);
+                                },
+                                failure: function (response) {
+                                    alert(response.responseText);
+                                }
+                            });
+                        },
+                        //minLength to specify after how many characters input call for suggestions to be made.
+                        minLength: 0,
+                    });
+        }
+
+        // SEARCH DATA FORM GRIDVIEW
+
+        function TextSearch() {
+            // alert(($("[id$=txtSearch]").val()));
+            var rows;
+            var coldata;
+            $('#txtSearch').select(function () {
+                $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
+                var data = $('#txtSearch').val();
+                var len = data.length;
+                if (len > 0) {
+                    $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
+                        coldata = $(this).children().eq(1);
+                        var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
+                        if (temp===0) {
+                            $(this).show();
+                        }
+                    });
+                } else {
+                    $('#<%=GridView1.ClientID%>').find('tr:gt(0)').show();
+                }
+               
+            });
+        }
+
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
+        
+        
         <div>
               <button class="btn" type="button" onclick="AddNewDept();return false;">NEW Name</button> 
-
         </div>
-        <br/>
+          <br/>
+
+
+        <center>
+             <b>Search</b>
+            <div>
+                <asp:TextBox ID="txtSearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+            </div>
+            <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+
+
+      
         <div>
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False">
+            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="false" PageSize="10" OnPageIndexChanging ="GridView1_PageIndexChanging"  >
                 <AlternatingRowStyle BackColor="White" />
 
                 <Columns>
@@ -164,16 +240,16 @@
 
             <br />
             <br />
-            <div>
+            <%--<div>
                 <fieldset style="width: 400px; height :40px;">
                     <legend> DropDownList</legend>
                     Select Department ID: &nbsp;
                     <asp:DropDownList ID="ddlDepartments" runat="server" Width="180px" />
                 </fieldset>
-            </div>
+            </div>--%>
             <br />
         </div>
-        </div>
+    </center>
     </form>
 </body>
 </html>
