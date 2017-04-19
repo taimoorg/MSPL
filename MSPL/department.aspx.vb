@@ -2,7 +2,12 @@
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        FillGrid()
+
+        If Not IsPostBack Then
+            DropDownList1.Items.Insert(0, "Select")
+        End If
+            FillGrid()
+
         'FillDropDownList()
     End Sub
     'Private Sub FillDropDownList()
@@ -51,6 +56,15 @@
 
     Protected Sub GridView1_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles GridView1.PageIndexChanging
         GridView1.PageIndex = e.NewPageIndex
-        Me.FillGrid()
+        FillGrid()
+    End Sub
+
+    Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+        Dim size As Integer = 0
+        If DropDownList1.SelectedItem.Text <> "--Select--" Then
+            size = Integer.Parse(DropDownList1.SelectedItem.Value.ToString())
+            GridView1.PageSize = size
+            FillGrid()
+        End If
     End Sub
 End Class

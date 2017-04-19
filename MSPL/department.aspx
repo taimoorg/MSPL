@@ -37,7 +37,7 @@
         }
 
         function SaveData() {
-               $.ajax({
+            $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_IU",
                 data: '{DEPT_ID: ' + $("#id").html() + ',Dept_Name:"' + $("#txtName").val() + '"}',
@@ -59,8 +59,7 @@
             });
         }
 
-        function AddNewDept()
-        {
+        function AddNewDept() {
             $("#id").html(0);
             $("#Dept_Name").val("");
 
@@ -104,40 +103,39 @@
         }
 
         function AutoComplete() {
-            $("#<%=txtSearch.ClientID %>").autocomplete({
-                        autoFocus: true,
-                        source: function (request, response) {
-                            $.ajax({
-                                url: "apis.aspx/AutoSearch",
-                                data: "{'SearchText': '" + request.term + "'}",
-                                dataType: "json",
-                                type: "POST",
-                                contentType: "application/json; charset=utf-8",
-                                success: function (data) {
-                                    response($.map(data.d, function (item) {
-                                        return {
-                                            label: item
-                                        }
-                                    }))
-                                },
-                                error: function (response) {
-                                    alert(response.responseText);
-                                },
-                                failure: function (response) {
-                                    alert(response.responseText);
+            $("#txtSearch").autocomplete({
+                autoFocus: true,
+                source: function (request, response) {
+                    $.ajax({
+                        url: "apis.aspx/AutoSearch",
+                        data: "{'SearchText': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data.d, function (item) {
+                                return {
+                                    label: item
                                 }
-                            });
+                            }))
                         },
-                        //minLength to specify after how many characters input call for suggestions to be made.
-                        minLength: 0,
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
                     });
+                },
+                //minLength to specify after how many characters input call for suggestions to be made.
+                minLength: 0,
+            });
         }
 
         // SEARCH DATA FORM GRIDVIEW
 
         function TextSearch() {
             // alert(($("[id$=txtSearch]").val()));
-            var rows;
             var coldata;
             $('#txtSearch').select(function () {
                 $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
@@ -147,14 +145,14 @@
                     $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
                         coldata = $(this).children().eq(1);
                         var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
-                        if (temp===0) {
+                        if (temp === 0) {
                             $(this).show();
                         }
                     });
                 } else {
                     $('#<%=GridView1.ClientID%>').find('tr:gt(0)').show();
                 }
-               
+
             });
         }
 
@@ -162,12 +160,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        
-        
+
+
         <div>
-              <button class="btn" type="button" onclick="AddNewDept();return false;">NEW Name</button> 
+            <button class="btn" type="button" onclick="AddNewDept();return false;">NEW Name</button>
         </div>
-          <br/>
+        <br />
 
 
         <center>
@@ -185,7 +183,7 @@
 
       
         <div>
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="false" PageSize="10" OnPageIndexChanging ="GridView1_PageIndexChanging"  >
+            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging"  >
                 <AlternatingRowStyle BackColor="White" />
 
                 <Columns>
@@ -229,6 +227,14 @@
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
 
             </asp:GridView>
+
+              <asp:Label ID="Label1" runat="server" Text="Choose No." Font-Bold="True" ForeColor="#CC3300"></asp:Label>
+            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                <asp:ListItem Text="15" Value="15"></asp:ListItem>
+                <asp:ListItem Text="20" Value="20"></asp:ListItem>
+            </asp:DropDownList>
 
            <div id="dialog" style="display: none">
                 <b>Id:</b> <span id="id"></span>
