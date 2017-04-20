@@ -1,4 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="department.aspx.vb" Inherits="MSPL.department" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation = "false" CodeBehind="department.aspx.vb" Inherits="MSPL.department" %>
+
+ <%--EnableEventValidation = "false" Use to Export gridview in Excel--%>
 
 <!DOCTYPE html>
 
@@ -15,6 +17,7 @@
         var editdialog
         $(document).ready(function () {
             SetDialog();
+            KeySearch();
             AutoComplete();
             $("[id$=txtSearch]").select(function () {
                 TextSearch();
@@ -138,11 +141,35 @@
             // alert(($("[id$=txtSearch]").val()));
             var coldata;
             $('#txtSearch').select(function () {
-                $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
+                $('#GridView1').find('tr:gt(0)').hide();
                 var data = $('#txtSearch').val();
                 var len = data.length;
                 if (len > 0) {
-                    $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
+                    $('#GridView1').find('tbody tr').each(function () {
+                        coldata = $(this).children().eq(1);
+                        var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
+                        if (temp === 0) {
+                            $(this).show();
+                        }
+                    });
+                } else {
+                    $('#GridView1').find('tr:gt(0)').show();
+                }
+
+            });
+        }
+
+        //Another Way To  SEARCH DATA FORM GRIDVIEW
+
+        function KeySearch() {
+            // alert(($("[id$=txtSearch]").val()));
+            var coldata;
+            $('#KeySearch').keyup(function () {
+                $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
+                   var data = $('#KeySearch').val();
+                   var len = data.length;
+                   if (len > 0) {
+                       $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
                         coldata = $(this).children().eq(1);
                         var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
                         if (temp === 0) {
@@ -153,8 +180,10 @@
                     $('#<%=GridView1.ClientID%>').find('tr:gt(0)').show();
                 }
 
-            });
+               });
         }
+
+
 
     </script>
 </head>
@@ -177,14 +206,21 @@
              <br />
              <br />
              <br />
+
+            <b>Key Search</b>
+            <div>
+                <asp:TextBox ID="KeySearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+            </div>
+
              <br />
              <br />
 
 
       
         <div>
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging"  >
+            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging" enablepagingandcallback= "false"   >
                 <AlternatingRowStyle BackColor="White" />
+                
 
                 <Columns>
 
@@ -235,6 +271,17 @@
                 <asp:ListItem Text="15" Value="15"></asp:ListItem>
                 <asp:ListItem Text="20" Value="20"></asp:ListItem>
             </asp:DropDownList>
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />
+             <br /> 
+             <br />
+             <br />
+             <br />
+
+
+
 
            <div id="dialog" style="display: none">
                 <b>Id:</b> <span id="id"></span>

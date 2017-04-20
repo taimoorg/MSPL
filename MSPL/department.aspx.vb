@@ -1,4 +1,7 @@
-﻿Public Class department
+﻿Imports System.IO
+Imports System.Drawing
+
+Public Class department
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -6,7 +9,9 @@
         If Not IsPostBack Then
             DropDownList1.Items.Insert(0, "Select")
         End If
-            FillGrid()
+
+        FillGrid()
+
 
         'FillDropDownList()
     End Sub
@@ -67,4 +72,49 @@
             FillGrid()
         End If
     End Sub
+
+    Protected Sub ExportToExcel(sender As Object, e As EventArgs)
+        Response.Clear()
+        Response.Buffer = True
+        Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls")
+        Response.Charset = ""
+        Response.ContentType = "application/vnd.ms-excel"
+        Using sw As New StringWriter()
+            Dim hw As New HtmlTextWriter(sw)
+
+            'To Export all pages
+            GridView1.AllowPaging = False
+            Me.FillGrid()
+
+            GridView1.HeaderRow.BackColor = Color.White
+            For Each cell As TableCell In GridView1.HeaderRow.Cells
+                cell.BackColor = GridView1.HeaderStyle.BackColor
+            Next
+            For Each row As GridViewRow In GridView1.Rows
+                row.BackColor = Color.White
+                For Each cell As TableCell In row.Cells
+                    If row.RowIndex Mod 2 = 0 Then
+                        cell.BackColor = GridView1.AlternatingRowStyle.BackColor
+                    Else
+                        cell.BackColor = GridView1.RowStyle.BackColor
+                    End If
+                    cell.CssClass = "textmode"
+                Next
+            Next
+
+            GridView1.RenderControl(hw)
+            'style to format numbers to string
+            Dim style As String = "<style> .textmode { } </style>"
+            Response.Write(style)
+            Response.Output.Write(sw.ToString())
+            Response.Flush()
+            Response.[End]()
+        End Using
+    End Sub
+
+    Public Overrides Sub VerifyRenderingInServerForm(control As Control)
+        'Verifies that the control is rendered
+    End Sub
+
+
 End Class
