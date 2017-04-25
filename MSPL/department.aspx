@@ -1,6 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation = "false" CodeBehind="department.aspx.vb" Inherits="MSPL.department" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation="false" CodeBehind="department.aspx.vb" Inherits="MSPL.department" %>
 
- <%--EnableEventValidation = "false" Use to Export gridview in Excel--%>
+<%--EnableEventValidation = "false" Use to Export gridview in Excel--%>
 
 <!DOCTYPE html>
 
@@ -17,11 +17,11 @@
         var editdialog
         $(document).ready(function () {
             SetDialog();
-            KeySearch();
             AutoComplete();
-            $("[id$=txtSearch]").select(function () {
-                TextSearch();
-            });
+            //KeySearch();
+            //$("[id$=txtSearch]").select(function () {
+            //    TextSearch();
+            //});
         });
 
         function SetDialog() {
@@ -105,8 +105,9 @@
             });
         }
 
+
         function AutoComplete() {
-            $("#txtSearch").autocomplete({
+            $("#<%=txtSearch.ClientID %>").autocomplete({
                 autoFocus: true,
                 source: function (request, response) {
                     $.ajax({
@@ -118,7 +119,8 @@
                         success: function (data) {
                             response($.map(data.d, function (item) {
                                 return {
-                                    label: item
+                                    label: item.Dept_Name,
+                                    val:item.DEPT_ID
                                 }
                             }))
                         },
@@ -130,46 +132,27 @@
                         }
                     });
                 },
-                //minLength to specify after how many characters input call for suggestions to be made.
-                minLength: 0,
+                 select: function (e, i) {
+                     $('#<%=Dept_Val.ClientID %>').val(i.item.val);
+                    __doPostBack("<%= btnGo.UniqueID%>", "OnClick");
+                },
+
+                minLength: 1,
             });
         }
 
-        // SEARCH DATA FORM GRIDVIEW
-
-        function TextSearch() {
-            // alert(($("[id$=txtSearch]").val()));
-            var coldata;
-            $('#txtSearch').select(function () {
-                $('#GridView1').find('tr:gt(0)').hide();
-                var data = $('#txtSearch').val();
-                var len = data.length;
-                if (len > 0) {
-                    $('#GridView1').find('tbody tr').each(function () {
-                        coldata = $(this).children().eq(1);
-                        var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
-                        if (temp === 0) {
-                            $(this).show();
-                        }
-                    });
-                } else {
-                    $('#GridView1').find('tr:gt(0)').show();
-                }
-
-            });
-        }
 
         //Another Way To  SEARCH DATA FORM GRIDVIEW
 
-        function KeySearch() {
+        <%-- function KeySearch() {
             // alert(($("[id$=txtSearch]").val()));
             var coldata;
             $('#KeySearch').keyup(function () {
                 $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
-                   var data = $('#KeySearch').val();
-                   var len = data.length;
-                   if (len > 0) {
-                       $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
+                var data = $('#KeySearch').val();
+                var len = data.length;
+                if (len > 0) {
+                    $('#<%=GridView1.ClientID%>').find('tbody tr').each(function () {
                         coldata = $(this).children().eq(1);
                         var temp = coldata.text().toUpperCase().indexOf(data.toUpperCase());
                         if (temp === 0) {
@@ -180,8 +163,8 @@
                     $('#<%=GridView1.ClientID%>').find('tr:gt(0)').show();
                 }
 
-               });
-        }
+            });
+        }--%>
 
 
 
@@ -189,41 +172,36 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
-
         <div>
             <button class="btn" type="button" onclick="AddNewDept();return false;">NEW Name</button>
         </div>
         <br />
-
-
         <center>
+     
+     <%--AUTO COMPLETE SEARCH--%> 
              <b>Search</b>
             <div>
                 <asp:TextBox ID="txtSearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+                 <asp:HiddenField ID="Dept_Val" runat="server" />
+                <asp:Button ID="btnGo" runat="server" Text="Button" style="display:none;"/>
             </div>
             <br />
              <br />
-             <br />
-             <br />
 
-            <b>Key Search</b>
+     <%-- <b>Key Search</b>
             <div>
                 <asp:TextBox ID="KeySearch" placeholder="Search by Department" runat="server"></asp:TextBox>
             </div>
 
              <br />
-             <br />
-
+             <br />--%>
 
       
         <div>
             <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging" enablepagingandcallback= "false"   >
                 <AlternatingRowStyle BackColor="White" />
-                
 
                 <Columns>
-
                     <asp:BoundField DataField="DEPT_ID" HeaderStyle-HorizontalAlign="Left" HeaderText="DEPT_ID" ItemStyle-HorizontalAlign="Left" SortExpression="DEPT_ID" ItemStyle-Width="80px">
                         <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
                         <ItemStyle HorizontalAlign="Left" Width="80px"></ItemStyle>
@@ -245,7 +223,6 @@
                         <ItemTemplate> <asp:LinkButton Text="Delete" ID="lnkDel" runat="server" /> </ItemTemplate>
                           <HeaderStyle HorizontalAlign="Left"></HeaderStyle>   
                         
-                       
                         <ItemStyle Width="100px"></ItemStyle>
                     </asp:TemplateField>
 
@@ -261,36 +238,28 @@
                 <SortedAscendingHeaderStyle BackColor="#246B61" />
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
-
             </asp:GridView>
 
-              <asp:Label ID="Label1" runat="server" Text="Choose No." Font-Bold="True" ForeColor="#CC3300"></asp:Label>
-            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+         <%--   PAGING WORK--%>
+           <asp:Label ID="Label1" runat="server" Text="Choose No." Font-Bold="True" ForeColor="#CC3300"></asp:Label>
+           <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                 <asp:ListItem Text="5" Value="5"></asp:ListItem>
                 <asp:ListItem Text="10" Value="10"></asp:ListItem>
                 <asp:ListItem Text="15" Value="15"></asp:ListItem>
                 <asp:ListItem Text="20" Value="20"></asp:ListItem>
-            </asp:DropDownList>
-            <br />
-            <br />
-            <br />
-            <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />
-             <br /> 
-             <br />
-             <br />
-             <br />
+           </asp:DropDownList>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
-
-
+        <%--Export To Excel
+           <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />--%>
+           <br /> 
 
            <div id="dialog" style="display: none">
                 <b>Id:</b> <span id="id"></span>
                 <br />
                 <b>Name:</b>
                 <input id="txtName" type="text" />
-               
-            </div>
-
+           </div>
             <br />
             <br />
             <%--<div>

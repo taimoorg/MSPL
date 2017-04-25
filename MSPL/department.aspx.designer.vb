@@ -32,13 +32,22 @@ Partial Public Class department
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''KeySearch control.
+    '''Dept_Val control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents KeySearch As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Dept_Val As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''btnGo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGo As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''GridView1 control.

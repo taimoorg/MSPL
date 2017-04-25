@@ -8,11 +8,17 @@ Public Class DataProvider
         objDatabase = DatabaseFactory.CreateDatabase()
         Return CType(objDatabase.ExecuteDataSet("P_Department_GetAll"), DataSet).Tables(0)
     End Function
-
     Public Shared Function P_Department_GetBy_Id(DEPT_ID As Integer) As DataRow
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
         Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Id", DEPT_ID), DataSet).Tables(0).Rows(0)
+    End Function
+
+    'USE IN GRIDVIEW
+    Public Shared Function P_Departments_GetBy_Id(DEPT_ID As Integer) As DataTable
+        Dim objDatabase As Database
+        objDatabase = DatabaseFactory.CreateDatabase()
+        Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Id", DEPT_ID), DataSet).Tables(0)
     End Function
 
     Public Shared Function P_Department_IU(obj As DepartmentInfo) As Integer

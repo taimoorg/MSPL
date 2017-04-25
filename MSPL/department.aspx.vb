@@ -12,7 +12,6 @@ Public Class department
 
         FillGrid()
 
-
         'FillDropDownList()
     End Sub
     'Private Sub FillDropDownList()
@@ -24,18 +23,22 @@ Public Class department
     '    ddlDepartments.DataBind()
 
     'End Sub
+
     Private Sub FillGrid()
-
         Dim DT As DataTable
-
         DT = DataProvider.P_Department_GetAll
         GridView1.DataSource = DT
         GridView1.DataBind()
+    End Sub
+    Private Sub FillGrid_ById()
+        Dim DT As DataTable
+        DT = DataProvider.P_Departments_GetBy_Id(Dept_Val.Value)
+        GridView1.DataSource = DT
+        GridView1.DataBind()
+        If Dept_Val.Value <> "" Then
+            txtSearch.Text = DT.Rows.Item(0).Item("Dept_Name")
+        End If
 
-        'Dim A As New DepartmentInfo
-        'A.DEPT_ID = 0
-        'A.Name = "fdfd"
-        'DepartmentDataProvider.P_Department_IU(A)
     End Sub
 
 
@@ -58,12 +61,12 @@ Public Class department
             LbDel.Visible = True
         End If
     End Sub
-
+    'PAGE NUMBER
     Protected Sub GridView1_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles GridView1.PageIndexChanging
         GridView1.PageIndex = e.NewPageIndex
         FillGrid()
     End Sub
-
+    'PAGE SIZE [NO.OF ROWS SHOW ON PER PAGE]
     Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
         Dim size As Integer = 0
         If DropDownList1.SelectedItem.Text <> "--Select--" Then
@@ -73,48 +76,50 @@ Public Class department
         End If
     End Sub
 
-    Protected Sub ExportToExcel(sender As Object, e As EventArgs)
-        Response.Clear()
-        Response.Buffer = True
-        Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls")
-        Response.Charset = ""
-        Response.ContentType = "application/vnd.ms-excel"
-        Using sw As New StringWriter()
-            Dim hw As New HtmlTextWriter(sw)
+    'ExportToExcel
+    'Protected Sub ExportToExcel(sender As Object, e As EventArgs)
+    '    Response.Clear()
+    '    Response.Buffer = True
+    '    Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls")
+    '    Response.Charset = ""
+    '    Response.ContentType = "application/vnd.ms-excel"
+    '    Using sw As New StringWriter()
+    '        Dim hw As New HtmlTextWriter(sw)
+    '        'To Export all pages
+    '        GridView1.AllowPaging = False
+    '        Me.FillGrid()
 
-            'To Export all pages
-            GridView1.AllowPaging = False
-            Me.FillGrid()
+    '        GridView1.HeaderRow.BackColor = Color.White
+    '        For Each cell As TableCell In GridView1.HeaderRow.Cells
+    '            cell.BackColor = GridView1.HeaderStyle.BackColor
+    '        Next
+    '        For Each row As GridViewRow In GridView1.Rows
+    '            row.BackColor = Color.White
+    '            For Each cell As TableCell In row.Cells
+    '                If row.RowIndex Mod 2 = 0 Then
+    '                    cell.BackColor = GridView1.AlternatingRowStyle.BackColor
+    '                Else
+    '                    cell.BackColor = GridView1.RowStyle.BackColor
+    '                End If
+    '                cell.CssClass = "textmode"
+    '            Next
+    '        Next
+    '        GridView1.RenderControl(hw)
+    '        'style to format numbers to string
+    '        Dim style As String = "<style> .textmode { } </style>"
+    '        Response.Write(style)
+    '        Response.Output.Write(sw.ToString())
+    '        Response.Flush()
+    '        Response.[End]()
+    '    End Using
+    'End Sub
 
-            GridView1.HeaderRow.BackColor = Color.White
-            For Each cell As TableCell In GridView1.HeaderRow.Cells
-                cell.BackColor = GridView1.HeaderStyle.BackColor
-            Next
-            For Each row As GridViewRow In GridView1.Rows
-                row.BackColor = Color.White
-                For Each cell As TableCell In row.Cells
-                    If row.RowIndex Mod 2 = 0 Then
-                        cell.BackColor = GridView1.AlternatingRowStyle.BackColor
-                    Else
-                        cell.BackColor = GridView1.RowStyle.BackColor
-                    End If
-                    cell.CssClass = "textmode"
-                Next
-            Next
+    'Public Overrides Sub VerifyRenderingInServerForm(control As Control)
+    '    'Verifies that the control is rendered
+    'End Sub
 
-            GridView1.RenderControl(hw)
-            'style to format numbers to string
-            Dim style As String = "<style> .textmode { } </style>"
-            Response.Write(style)
-            Response.Output.Write(sw.ToString())
-            Response.Flush()
-            Response.[End]()
-        End Using
+
+    Protected Sub btnGo_Click(sender As Object, e As EventArgs) Handles btnGo.Click
+        FillGrid_ById()
     End Sub
-
-    Public Overrides Sub VerifyRenderingInServerForm(control As Control)
-        'Verifies that the control is rendered
-    End Sub
-
-
 End Class

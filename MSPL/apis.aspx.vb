@@ -21,13 +21,13 @@ Public Class apis
 
     End Function
 
-    <WebMethod()> _
-    Public Shared Function P_AutoSearch_GetBy_Name(Dept_Name As String) As String
-        Dim dt As DataTable
-        dt = DataProvider.P_AutoSearch_GetBy_Name(Dept_Name)
-        Return GethtmlTable(dt)
+    '<WebMethod()> _
+    'Public Shared Function P_AutoSearch_GetBy_Name(Dept_Name As String) As String
+    '    Dim dt As DataTable
+    '    dt = DataProvider.P_AutoSearch_GetBy_Name(Dept_Name)
+    '    Return GethtmlTable(dt)
 
-    End Function
+    'End Function
 
     <WebMethod()> _
     Public Shared Function GetDeptTable() As String
@@ -90,7 +90,6 @@ Public Class apis
                           .Dept_Name = dt.Rows(i)("Dept_Name").ToString() _
                       })
             Next
-
         End If
         Return objDept
 
@@ -110,6 +109,33 @@ Public Class apis
             Next
         End If
         Return objEmp
+    End Function
+
+    'AUTO COMPLETE
+    '<WebMethod()> _
+    'Public Shared Function AutoSearch(SearchText As String) As String()
+    '    Dim DT As DataTable
+    '    Dim DeptList As New List(Of String)()
+    '    DT = DataProvider.P_Department_AutoComplete(SearchText)
+    '    For i = 0 To DT.Rows.Count - 1
+    '        DeptList.Add(DT.Rows(i).Item("Dept_Name").ToString())
+    '    Next
+    '    Return DeptList.ToArray()
+    'End Function
+
+    <WebMethod()> _
+    Public Shared Function AutoSearch(SearchText As String) As List(Of DepartmentInfo)
+        Dim DT As DataTable
+        Dim DeptList As New List(Of DepartmentInfo)
+        Dim obj As New DepartmentInfo
+        DT = DataProvider.P_Department_AutoComplete(SearchText)
+        For i = 0 To DT.Rows.Count - 1
+            obj = New DepartmentInfo
+            obj.DEPT_ID = DT.Rows(i).Item("DEPT_ID")
+            obj.Dept_Name = DT.Rows(i).Item("Dept_Name")
+            DeptList.Add(obj)
+        Next
+        Return DeptList
     End Function
 
 End Class
