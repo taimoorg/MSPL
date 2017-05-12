@@ -18,10 +18,7 @@
         $(document).ready(function () {
             SetDialog();
             AutoComplete();
-            //KeySearch();
-            //$("[id$=txtSearch]").select(function () {
-            //    TextSearch();
-            //});
+            KeySearch();
         });
 
         function SetDialog() {
@@ -70,6 +67,7 @@
         }
 
         function Del_Record(DEPT_ID) {
+            if(confirm("Are u sure?"))
             $.ajax({
                 type: "POST",
                 url: "apis.aspx/P_Department_Delete",
@@ -77,6 +75,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
             });
+            SetDialog();
         }
 
 
@@ -137,15 +136,15 @@
                     __doPostBack("<%= btnGo.UniqueID%>", "OnClick");
                 },
 
-                minLength: 1,
-            });
+                minLength: 0,
+            }).bind('focus', function () { $(this).autocomplete("search"); }); //SHOW LIST ON CLICK
+            //});
         }
 
 
         //Another Way To  SEARCH DATA FORM GRIDVIEW
 
-        <%-- function KeySearch() {
-            // alert(($("[id$=txtSearch]").val()));
+       function KeySearch() {
             var coldata;
             $('#KeySearch').keyup(function () {
                 $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
@@ -164,7 +163,7 @@
                 }
 
             });
-        }--%>
+        }
 
 
 
@@ -188,13 +187,13 @@
             <br />
              <br />
 
-     <%-- <b>Key Search</b>
+      <b>Key Search</b>
             <div>
-                <asp:TextBox ID="KeySearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+                <asp:TextBox ID="KeySearch" placeholder="Search by Name" runat="server"></asp:TextBox>
             </div>
 
              <br />
-             <br />--%>
+             <br />
 
       
         <div>
@@ -250,8 +249,8 @@
            </asp:DropDownList>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 
-        <%--Export To Excel
-           <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />--%>
+        <%--Export To Excel--%>
+           <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />
            <br /> 
 
            <div id="dialog" style="display: none">
