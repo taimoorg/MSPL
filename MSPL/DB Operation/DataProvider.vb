@@ -14,7 +14,7 @@ Public Class DataProvider
         Return CType(objDatabase.ExecuteDataSet("P_Department_GetBy_Id", DEPT_ID), DataSet).Tables(0).Rows(0)
     End Function
 
-    'USE IN GRIDVIEW
+    'USE IN GRIDVIEW FOR FILTER DATA BY AUTOCOMPLETE 
     Public Shared Function P_Departments_GetBy_Id(DEPT_ID As Integer) As DataTable
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
@@ -62,4 +62,22 @@ Public Class DataProvider
         objDatabase = DatabaseFactory.CreateDatabase()
         Return CType(objDatabase.ExecuteDataSet("P_Department_AutoComplete", SearchText), DataSet).Tables(0)
     End Function
+
+    'Order SP For Testing
+    Public Shared Sub P_Order_IU(Order_ID As Integer, Order_No As Integer, Name As String, Price As Decimal, Order_Date As DateTime)
+        Dim database As Database = DatabaseFactory.CreateDatabase()
+        database.ExecuteNonQuery("P_Order_IU", Order_ID, Order_No ,Name, Price, Order_Date)
+    End Sub
+
+    Public Shared Function P_Order_GetAll(Name As String, Order_No As Integer, FromDate As DateTime, ToDate As DateTime) As DataTable
+        Dim objDatabase As Database
+        objDatabase = DatabaseFactory.CreateDatabase()
+        Return CType(objDatabase.ExecuteDataSet("P_Order_GetAll", Name, Order_No, FromDate, ToDate), DataSet).Tables(0)
+    End Function
+
+    'Public Shared Function P_Order_GetAll() As DataTable
+    '    Dim objDatabase As Database
+    '    objDatabase = DatabaseFactory.CreateDatabase()
+    '    Return CType(objDatabase.ExecuteDataSet("P_Order_GetAll"), DataSet).Tables(0)
+    'End Function
 End Class
