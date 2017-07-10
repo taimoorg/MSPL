@@ -72,23 +72,32 @@
                 <br />
                 <br />
             </div>
-              <div style="margin-left: auto; margin-right: auto; width: 80%">
-         
-            Name:
-                  <asp:TextBox ID="filterName" runat="server"></asp:TextBox> &nbsp;
+            <div style="margin-left: auto; margin-right: auto; width: 80%">
+                Name:
+                  <asp:TextBox ID="filterName" runat="server"></asp:TextBox>
+                &nbsp;
+                 Order No:
+                  <asp:TextBox ID="Order" runat="server"></asp:TextBox>
+                &nbsp;
           From Date:
-                  <asp:TextBox ID="FromDate" runat="server"></asp:TextBox> &nbsp;
+                  <asp:TextBox ID="FromDate" runat="server"></asp:TextBox>
+                &nbsp;
           To Date:
-                  <asp:TextBox  ID="ToDate" runat="server"></asp:TextBox>  &nbsp; &nbsp; &nbsp; &nbsp;
+                  <asp:TextBox ID="ToDate" runat="server"></asp:TextBox>
+                &nbsp; &nbsp; &nbsp; &nbsp;
             <asp:Button ID="btnSearch" Text="Search" runat="server" OnClick="btnfilter_Click" />
-        </div>
-         <br />
+            </div>
+            <br />
 
             <div style="margin-left: auto; margin-right: auto; width: 80%">
                 <asp:GridView ID="gvOrder" runat="server" Width="80%" AutoGenerateColumns="false" DataKeyNames="Order_ID"
                     HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25px">
                     <Columns>
-                        <asp:BoundField DataField="Order_ID" HeaderText="Order ID">
+                    <%--    <asp:BoundField DataField="Order_ID" HeaderText="Order ID">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>--%>
+                        <asp:BoundField DataField="Order_No" HeaderText="Order No">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
                             <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
@@ -114,6 +123,11 @@
         <asp:Panel ID="pnlEdit" runat="server" Visible="false">
             <div>
                 <table style="margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <td>Order No: </td>
+                        <td>
+                            <asp:TextBox ID="txtOrderNo" runat="server" Width="300"></asp:TextBox></td>
+                    </tr>
                     <tr>
                         <td>Name: </td>
                         <td>

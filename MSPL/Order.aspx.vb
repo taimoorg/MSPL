@@ -8,6 +8,7 @@ Public Class Order
     End Sub
 
     Private Sub lbAddNew_Click(sender As Object, e As EventArgs) Handles lbAddNew.Click
+        txtOrderNo.Text = ""
         txtName.Text = ""
         txtPrice.Text = ""
         txtDate.Text = ""
@@ -23,7 +24,7 @@ Public Class Order
             litError.Visible = True
             Return
         End If
-        DataProvider.P_Order_IU(Order_ID.Value, txtName.Text, txtPrice.Text.Trim, txtDate.Text)
+        DataProvider.P_Order_IU(Order_ID.Value, txtOrderNo.Text, txtName.Text, txtPrice.Text.Trim, txtDate.Text)
         FillGrid()
         pnlData.Visible = True
         pnlEdit.Visible = False
@@ -31,6 +32,7 @@ Public Class Order
 
     Private Sub FillGrid()
         Dim dt As DataTable
+        'Convert String into datetime
         Dim FDate As DateTime
         Dim TDate As DateTime
         If (FromDate.Text <> "") Then
@@ -44,8 +46,12 @@ Public Class Order
         Else
             TDate = "2030-07-01"
         End If
+        'Convert String into integer
+        Dim OrderNo As Integer
+        'Int32.TryParse(Order.Text, OrderNo)
+        Integer.TryParse(Order.Text, OrderNo)
 
-        dt = DataProvider.P_Order_GetAll(filterName.Text.Trim, FDate, TDate)
+        dt = DataProvider.P_Order_GetAll(filterName.Text.Trim, OrderNo, FDate, TDate)
         If dt.Rows.Count = 0 Then
             gvOrder.Visible = False
         Else

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Employees.aspx.vb" Inherits="MSPL.Employees" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false"  CodeBehind="Employees.aspx.vb" Inherits="MSPL.Employees" %>
 
 <!DOCTYPE html>
 
@@ -27,15 +27,13 @@
             // AUTO COMPLETE
             AutoComplete();
             $("[id$=txtSearch]").select(function () {
-               // var department = ($("[id$=txtSearch]").val());
-              // TextSearch(department);
                 TextSearch();
             });
 
         });
 
         function TextSearch() {
-          //  alert(($("[id$=txtSearch]").val()));
+
             $.ajax({
                 type: "Post",
                 url: "apisEmployee.aspx/P_Department_AutoSearch",
@@ -224,6 +222,7 @@
                     $("#txtAddress").val(response.d.Emp_Address); // RETURNED THE SAME RECORD WHICH WAS INSERTED AT NEW EMPLOYEE
                     $("#ddlDepartments").val(response.d.DEPT_ID);
                     $("#ddlShift").val(response.d.Emp_Shift);
+                    $("#txtSalary").val(response.d.Salary);
                     //$("#datepicker").val(response.d.Hire_Date).datepicker();
                     //$("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' }).val(response.d.Hire_Date);
                     $('#datepicker').datepicker({
@@ -248,9 +247,11 @@
         //AutoComplete Search With Department
 
         function AutoComplete() {
+     
             $("#<%=txtSearch.ClientID %>").autocomplete({
                 autoFocus: true,
                 source: function (request, response) {
+                  
                     $.ajax({
                         url: "apisEmployee.aspx/AutoComplete",
                         data: "{'SearchText': '" + request.term + "'}",
@@ -260,7 +261,8 @@
                         success: function (data) {
                             response($.map(data.d, function (item) {
                                 return {
-                                    label: item
+                                  label: item
+                    
                                 }
                             }))
                         },
@@ -272,9 +274,10 @@
                         }
                     });
                 },
-                //minLength to specify after how many characters input call for suggestions to be made.
-                minLength: 0,
+
+                minLength: 1,
             });
+
         }
 
     </script>
@@ -291,7 +294,8 @@
 
             <b>AutoComplete</b>
             <div>
-                <asp:TextBox ID="txtSearch" placeholder="Search by Department" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtSearch" placeholder="Search by Department" runat="server" Width ="200px"></asp:TextBox>
+              
             </div>
             <br />
 

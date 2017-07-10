@@ -68,13 +68,13 @@ Partial Public Class Order
     Protected WithEvents filterName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''ToDate control.
+    '''Order control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ToDate As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Order As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''FromDate control.
@@ -84,6 +84,15 @@ Partial Public Class Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FromDate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ToDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ToDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''btnSearch control.
@@ -111,6 +120,15 @@ Partial Public Class Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlEdit As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtOrderNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtOrderNo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''txtName control.
