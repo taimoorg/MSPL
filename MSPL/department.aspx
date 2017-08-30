@@ -67,14 +67,14 @@
         }
 
         function Del_Record(DEPT_ID) {
-            if(confirm("Are u sure?"))
-            $.ajax({
-                type: "POST",
-                url: "apis.aspx/P_Department_Delete",
-                data: '{DEPT_ID: ' + DEPT_ID + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-            });
+            if (confirm("Are u sure?"))
+                $.ajax({
+                    type: "POST",
+                    url: "apis.aspx/P_Department_Delete",
+                    data: '{DEPT_ID: ' + DEPT_ID + '}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                });
             SetDialog();
         }
 
@@ -119,7 +119,7 @@
                             response($.map(data.d, function (item) {
                                 return {
                                     label: item.Dept_Name,
-                                    val:item.DEPT_ID
+                                    val: item.DEPT_ID
                                 }
                             }))
                         },
@@ -131,22 +131,22 @@
                         }
                     });
                 },
-                 select: function (e, i) {
-                     $('#<%=Dept_Val.ClientID %>').val(i.item.val);
-                    __doPostBack("<%= btnGo.UniqueID%>", "OnClick");
-                },
+                select: function (e, i) {
+                    $('#<%=Dept_Val.ClientID %>').val(i.item.val);
+                     __doPostBack("<%= btnGo.UniqueID%>", "OnClick");
+                 },
 
                 minLength: 0,
             }).bind('focus', function () { $(this).autocomplete("search"); }); //SHOW LIST ON CLICK
             //});
-        }
+         }
 
-        //Another Way To  SEARCH DATA FORM GRIDVIEW
+         //Another Way To  SEARCH DATA FORM GRIDVIEW
 
-       function KeySearch() {
-            var coldata;
-            $('#KeySearch').keyup(function () {
-                $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
+         function KeySearch() {
+             var coldata;
+             $('#KeySearch').keyup(function () {
+                 $('#<%=GridView1.ClientID%>').find('tr:gt(0)').hide();
                 var data = $('#KeySearch').val();
                 var len = data.length;
                 if (len > 0) {
@@ -196,8 +196,9 @@
 
       
         <div>
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging" enablepagingandcallback= "false"   >
-                <AlternatingRowStyle BackColor="White" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False">
+            <%--<asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" Width="100%" AutoGenerateColumns="False" AllowPaging="true" PageSize="12" OnPageIndexChanging ="GridView1_PageIndexChanging" enablepagingandcallback= "false"   >
+                <AlternatingRowStyle BackColor="White" />--%>
 
                 <Columns>
                     <asp:BoundField DataField="DEPT_ID" HeaderStyle-HorizontalAlign="Left" HeaderText="DEPT_ID" ItemStyle-HorizontalAlign="Left" SortExpression="DEPT_ID" ItemStyle-Width="80px">
@@ -239,17 +240,17 @@
             </asp:GridView>
 
          <%--   PAGING WORK--%>
-           <asp:Label ID="Label1" runat="server" Text="Choose No." Font-Bold="True" ForeColor="#CC3300"></asp:Label>
+    <%--       <asp:Label ID="Label1" runat="server" Text="Choose No." Font-Bold="True" ForeColor="#CC3300"></asp:Label>
            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                 <asp:ListItem Text="5" Value="5"></asp:ListItem>
                 <asp:ListItem Text="10" Value="10"></asp:ListItem>
                 <asp:ListItem Text="15" Value="15"></asp:ListItem>
                 <asp:ListItem Text="20" Value="20"></asp:ListItem>
            </asp:DropDownList>
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;--%>
 
         <%--Export To Excel--%>
-           <asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />
+           <%--<asp:Button ID="btnExport" runat="server" Text="Export To Excel" OnClick = "ExportToExcel" />--%>
            <br /> 
 
            <div id="dialog" style="display: none">
@@ -260,13 +261,13 @@
            </div>
             <br />
             <br />
-            <%--<div>
+            <div>
                 <fieldset style="width: 400px; height :40px;">
                     <legend> DropDownList</legend>
                     Select Department ID: &nbsp;
-                    <asp:DropDownList ID="ddlDepartments" runat="server" Width="180px" />
+                      <asp:DropDownList ID="ddlDepartments" runat="server"  onselectedindexchanged="ddlDepartments_SelectedIndexChanged" Width="162px"></asp:DropDownList>
                 </fieldset>
-            </div>--%>
+            </div>
             <br />
         </div>
     </center>

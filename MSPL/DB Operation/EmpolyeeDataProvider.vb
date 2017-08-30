@@ -1,8 +1,41 @@
 ﻿Imports Microsoft.Practices.EnterpriseLibrary.Data
 Imports Microsoft.Practices.EnterpriseLibrary.Common
 
-Public Class EmpolyeeDataProvider
 
+Public Class EmpolyeeDataProvider
+    Sub New()
+    End Sub
+    'Queries For Gridview
+    'Insertion for Gridview 
+    Public Shared Function P_Emp_GetALL(ID As Integer) As DataTable
+        Dim database As Database = DatabaseFactory.CreateDatabase()
+        Return CType(database.ExecuteDataSet("P_Emp_GetALL", ID), DataSet).Tables(0)
+    End Function
+    Public Shared Sub P_Emp_IU(Emp_ID As Integer, Emp_Name As String, Emp_Address As String, Hire_Date As Date, Emp_Shift As String, Salary As Decimal, DEPT_ID As Integer)
+        Dim database As Database = DatabaseFactory.CreateDatabase()
+        database.ExecuteNonQuery("P_Emp_IU", Emp_ID, Emp_Name, Emp_Address, Hire_Date, Emp_Shift, Salary, DEPT_ID)
+    End Sub
+    Public Shared Function ExecuteSelectSingleRow(ByVal Query As String) As System.Data.DataRow
+        Dim objDatabase As Database
+        Dim DT As DataTable
+        objDatabase = DatabaseFactory.CreateDatabase()
+        DT = CType(objDatabase.ExecuteDataSet(System.Data.CommandType.Text, Query), System.Data.DataSet).Tables(0)
+        If DT.Rows.Count = 0 Then
+            Return Nothing
+        Else
+            Return DT.Rows(0)
+        End If
+    End Function
+    Public Shared Function ExecuteSelect(ByVal Query As String) As System.Data.DataTable
+        Dim objDatabase As Database
+        objDatabase = DatabaseFactory.CreateDatabase()
+        Dim dcCommand As System.Data.Common.DbCommand
+        dcCommand = objDatabase.GetSqlStringCommand(Query)
+        dcCommand.CommandTimeout = 2000
+        Return CType(objDatabase.ExecuteDataSet(dcCommand), System.Data.DataSet).Tables(0)
+    End Function
+
+    'Insertion for apis
     Public Shared Function P_Empolyee_IU(obj As EmpolyeeInfo) As Integer
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
@@ -35,4 +68,5 @@ Public Class EmpolyeeDataProvider
     End Function
 
 End Class
+
 
