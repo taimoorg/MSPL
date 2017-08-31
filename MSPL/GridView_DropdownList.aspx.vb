@@ -31,6 +31,13 @@
         txtShift.Text = ""
         txtSalary.Text = ""
 
+        For i = 0 To ddlDepartment.Items.Count - 1
+            If ddlDepartment.Items(i).Value = deptList.Value Then
+                ddlDepartment.SelectedIndex = i
+                Exit For
+            End If
+        Next
+
         pnlData.Visible = False
         pnlEdit.Visible = True
 
@@ -67,6 +74,7 @@
     End Sub
     Protected Sub ddlDeptList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlDeptList.SelectedIndexChanged
         FillGrid(ddlDeptList.SelectedItem.Value)
+        deptList.Value = ddlDeptList.SelectedItem.Value
     End Sub
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

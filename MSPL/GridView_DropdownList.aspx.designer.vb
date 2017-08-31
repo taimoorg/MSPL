@@ -158,6 +158,15 @@ Partial Public Class GridView_DropdownList
     Protected WithEvents Emp_ID As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''deptList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents deptList As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''btnSave control.
     '''</summary>
     '''<remarks>

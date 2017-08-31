@@ -157,6 +157,7 @@
                         <td>
                             <asp:HiddenField runat="server" ID="DEPT_ID" />
                             <asp:HiddenField runat="server" ID="Emp_ID" Value="0" />
+                            <asp:HiddenField runat="server" ID="deptList" />
                         </td>
                     </tr>
                 </table>
