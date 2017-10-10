@@ -68,7 +68,7 @@
                         <td>Department: </td>
                         <td>
                             <asp:DropDownList ID="ddlDeptList" OnSelectedIndexChanged="ddlDeptList_SelectedIndexChanged" AutoPostBack ="true"   runat="server" Width="180px ">
-                                 <asp:ListItem Text="--Select Department--" Value="0" ></asp:ListItem>
+                                 <asp:ListItem Text="--Select Department--" Value="100" ></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                         

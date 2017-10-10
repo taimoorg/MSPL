@@ -74,7 +74,7 @@
     End Sub
     Protected Sub ddlDeptList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlDeptList.SelectedIndexChanged
         FillGrid(ddlDeptList.SelectedItem.Value)
-        deptList.Value = ddlDeptList.SelectedItem.Value
+        'deptList.Value = ddlDeptList.SelectedItem.Value
     End Sub
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
