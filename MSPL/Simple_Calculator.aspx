@@ -45,7 +45,7 @@
              //        $("#errmsg").html("Digits Only").show().fadeOut("slow");
              //        return false;
              //    }
-             });
+             );
 
            
 
