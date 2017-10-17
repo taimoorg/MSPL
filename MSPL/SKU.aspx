@@ -1,0 +1,127 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="SKU.aspx.vb" Inherits="MSPL.SKU" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SKU</title>
+
+</head>
+<body>
+    <style>
+        .top_cap {
+            background-color: #4789c4;
+            font-size: 16pt;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            padding: 5px;
+            width: auto;
+        }
+
+        .error {
+            font-size: 12pt;
+            font-weight: bold;
+            text-align: center;
+            color: #ff0000;
+        }
+    </style>
+
+    <form id="form1" runat="server">
+        <div class="top_cap">
+            <asp:Literal ID="litCap" runat="server"></asp:Literal>
+        </div>
+
+        <div class="error">
+            <asp:Literal ID="litError" runat="server"></asp:Literal>
+        </div>
+
+        <asp:Panel ID="pnlData" runat="server" Visible="true">
+
+            <div style="margin-left: auto; margin-right: auto; text-align: center">
+                <asp:LinkButton ID="lbAddNew" runat="server">Add New Sku</asp:LinkButton>
+                <br />
+                <br />
+            </div>
+
+            <div style="margin-left: auto; margin-right: auto; width: auto">
+                <asp:GridView ID="gvData" runat="server" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX">
+                    <Columns>
+                        <asp:BoundField DataField="SKU" HeaderText="SKU">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Description" HeaderText="Description">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="SumUPWeight" HeaderText="Sum UP Weight">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="SumUPHeight" HeaderText="Sum UP Height">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="SumUPWidth" HeaderText="Sum UP Width">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="SumUPDepth" HeaderText="Sum UP Depth">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="PackageCube" HeaderText="Package Cube">
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" />
+                        </asp:BoundField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+        </asp:Panel>
+
+        <asp:Panel ID="pnlEdit" runat="server" Visible="false">
+            <div style="margin-left: auto; margin-right: auto">
+                <table>
+                    <tr>
+                        <td>Sku:</td>
+                        <td>
+                            <asp:TextBox ID="txtSku" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td>
+                            <asp:TextBox ID="txtDescrp" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Sum of unit pack weight:</td>
+                        <td>
+                            <asp:TextBox ID="txtWeight" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Sum of unit pack Height:</td>
+                        <td>
+                            <asp:TextBox ID="txtHeight" runat="server"></asp:TextBox></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sum of unit pack Width:</td>
+                        <td>
+                            <asp:TextBox ID="txtWidth" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Sum of unit pack Depth:</td>
+                        <td>
+                            <asp:TextBox ID="txtDepth" runat="server"></asp:TextBox></td>
+                    </tr>
+                </table>
+
+            </div>
+        </asp:Panel>
+
+
+
+
+    </form>
+</body>
+</html>
