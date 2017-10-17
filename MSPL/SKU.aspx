@@ -113,6 +113,7 @@
                         <td>Sum of unit pack Depth:</td>
                         <td>
                             <asp:TextBox ID="txtDepth" runat="server"></asp:TextBox></td>
+                        <asp:HiddenField ID="Sku_ID" runat="server" Value="0" />
                     </tr>
                 </table>
 

@@ -129,4 +129,13 @@ Partial Public Class SKU
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDepth As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Sku_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Sku_ID As Global.System.Web.UI.WebControls.HiddenField
 End Class
