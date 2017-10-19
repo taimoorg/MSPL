@@ -95,7 +95,7 @@
             EditRecord()
         ElseIf e.CommandName = "CmdDelete" Then
             Emp_ID.Value = gvEmp.DataKeys(e.CommandArgument).Values(0)
-            ' DeleteRecord()
+            DeleteRecord()
         End If
     End Sub
     Private Sub EditRecord()
@@ -118,5 +118,9 @@
         litCap.Text = "Edit Label"
         pnlData.Visible = False
         pnlEdit.Visible = True
+    End Sub
+    Private Sub DeleteRecord()
+        EmpolyeeDataProvider.P_Empolyee_Del(Emp_ID.Value)
+        FillGrid()
     End Sub
 End Class
