@@ -15,6 +15,11 @@ Public Class EmpolyeeDataProvider
         Dim database As Database = DatabaseFactory.CreateDatabase()
         database.ExecuteNonQuery("P_Emp_IU", Emp_ID, Emp_Name, Emp_Address, Hire_Date, Emp_Shift, Salary, DEPT_ID)
     End Sub
+    Public Shared Sub P_Empolyee_Del(Emp_ID As Integer)
+        Dim database As Database
+        database = DatabaseFactory.CreateDatabase()
+        database.ExecuteNonQuery("P_Empolyee_Del", Emp_ID)
+    End Sub
     Public Shared Function ExecuteSelectSingleRow(ByVal Query As String) As System.Data.DataRow
         Dim objDatabase As Database
         Dim DT As DataTable
