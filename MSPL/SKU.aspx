@@ -39,13 +39,14 @@
         <asp:Panel ID="pnlData" runat="server" Visible="true">
 
             <div style="margin-left: auto; margin-right: auto; text-align: center">
+                <br />
                 <asp:LinkButton ID="lbAddNew" runat="server">Add New Sku</asp:LinkButton>
                 <br />
                 <br />
             </div>
 
-            <div style="margin-left: auto; margin-right: auto; width: auto">
-                <asp:GridView ID="gvData" runat="server" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX">
+            <div style="margin-left: auto; margin-right: auto; width: 90%">
+                <asp:GridView ID="gvData" runat="server"  Width="85%" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX">
                     <Columns>
                         <asp:BoundField DataField="SKU" HeaderText="SKU">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
@@ -71,52 +72,59 @@
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
                             <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="PackageCube" HeaderText="Package Cube">
-                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
-                            <ItemStyle HorizontalAlign="Left" />
-                        </asp:BoundField>
+                              <asp:ButtonField ButtonType="Link" CommandName="CmdEdit" HeaderStyle-HorizontalAlign="Center" HeaderText="Edit" ItemStyle-HorizontalAlign="Center" Text="Edit">
+                            <HeaderStyle HorizontalAlign="Center" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:ButtonField>
+                        <asp:ButtonField ButtonType="Link" CommandName="CmdDelete" HeaderStyle-HorizontalAlign="Center" HeaderText="Delete" ItemStyle-HorizontalAlign="Center" Text="Delete">
+                            <HeaderStyle HorizontalAlign="Center" ForeColor="White"/>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:ButtonField>
                     </Columns>
                 </asp:GridView>
             </div>
         </asp:Panel>
 
         <asp:Panel ID="pnlEdit" runat="server" Visible="false">
-            <div style="margin-left: auto; margin-right: auto">
-                <table>
-                    <tr>
-                        <td>Sku:</td>
-                        <td>
-                            <asp:TextBox ID="txtSku" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Description:</td>
-                        <td>
-                            <asp:TextBox ID="txtDescrp" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Sum of unit pack weight:</td>
-                        <td>
-                            <asp:TextBox ID="txtWeight" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Sum of unit pack Height:</td>
-                        <td>
-                            <asp:TextBox ID="txtHeight" runat="server"></asp:TextBox></td>
-                    </tr>
 
-                    <tr>
-                        <td>Sum of unit pack Width:</td>
-                        <td>
-                            <asp:TextBox ID="txtWidth" runat="server"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>Sum of unit pack Depth:</td>
-                        <td>
-                            <asp:TextBox ID="txtDepth" runat="server"></asp:TextBox></td>
-                        <asp:HiddenField ID="Sku_ID" runat="server" Value="0" />
-                    </tr>
-                </table>
+            <br />
+            <table style="margin-left: auto; margin-right: auto">
+                <tr>
+                    <td>Sku:</td>
+                    <td>
+                        <asp:TextBox ID="txtSku" runat="server"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td>
+                        <asp:TextBox ID="txtDescrp" runat="server"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td>Sum of unit pack weight:</td>
+                    <td>
+                        <asp:TextBox ID="txtWeight" runat="server"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td>Sum of unit pack Height:</td>
+                    <td>
+                        <asp:TextBox ID="txtHeight" runat="server"></asp:TextBox></td>
+                </tr>
 
+                <tr>
+                    <td>Sum of unit pack Width:</td>
+                    <td>
+                        <asp:TextBox ID="txtWidth" runat="server"></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td>Sum of unit pack Depth:</td>
+                    <td>
+                        <asp:TextBox ID="txtDepth" runat="server"></asp:TextBox></td>
+                    <asp:HiddenField ID="Sku_ID" runat="server" Value="0" />
+                </tr>
+            </table>
+            <br />
+            <div style="margin-left:auto ; margin-right:auto;text-align:center">
+                <asp:Button ID="btnSave" runat="server" Text="Save" Width="100px" />&nbsp;&nbsp;&nbsp;<asp:Button ID="btnCancel" runat="server" Text="Cancel" Width="100px" />
             </div>
         </asp:Panel>
 
