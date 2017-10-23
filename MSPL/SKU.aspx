@@ -48,6 +48,14 @@
             <div style="margin-left: auto; margin-right: auto; width: 90%">
                 <asp:GridView ID="gvData" runat="server"  Width="85%" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX">
                     <Columns>
+                      <asp:TemplateField>
+                          <HeaderStyle HorizontalAlign="Center" Width="20px"/>
+                          <ItemStyle HorizontalAlign="Center" />
+                          <ItemTemplate>
+                              <%#CType(Container,GridViewRow).RowIndex + 1 %>
+                          </ItemTemplate>
+
+                      </asp:TemplateField>
                         <asp:BoundField DataField="SKU" HeaderText="SKU">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
                             <ItemStyle HorizontalAlign="Left" />

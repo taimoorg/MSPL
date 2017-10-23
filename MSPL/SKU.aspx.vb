@@ -48,9 +48,6 @@
         pnlData.Visible = True
         pnlEdit.Visible = False
     End Sub
-
-
-
     Private Sub EditRecord()
         Dim Dr As DataRow
         Dr = SkuDataProvider.ExecuteSelectSingleRow(String.Format("select * from T_Sku where Sku_ID ='{0}'", Sku_ID.Value))
