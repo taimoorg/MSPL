@@ -68,7 +68,7 @@
                         <td>Department: </td>
                         <td>
                             <asp:DropDownList ID="ddlDeptList" OnSelectedIndexChanged="ddlDeptList_SelectedIndexChanged" AutoPostBack ="true"   runat="server" Width="180px ">
-                                 <asp:ListItem Text="--Select Department--" Value="100" ></asp:ListItem>
+                                 <asp:ListItem Text="--Select Department--" Value="0" ></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                         
@@ -78,8 +78,12 @@
             </div>
             <br />
 
+
+
+
             <div style="margin-left: auto; margin-right: auto; width: 90%">
                 <asp:GridView ID="gvEmp" runat="server" Width="85%" AutoGenerateColumns="false" DataKeyNames="Emp_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25px">
+                     
                     <Columns>
                         <asp:BoundField DataField="DEPT_Name" HeaderText="Department">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
