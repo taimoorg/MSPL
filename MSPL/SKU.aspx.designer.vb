@@ -59,6 +59,15 @@ Partial Public Class SKU
     Protected WithEvents lbAddNew As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''ddlClientList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlClientList As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''gvData control.
     '''</summary>
     '''<remarks>
@@ -75,6 +84,15 @@ Partial Public Class SKU
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlEdit As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''ddlClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlClient As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''txtSku control.
@@ -138,6 +156,15 @@ Partial Public Class SKU
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Sku_ID As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hdnClientList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hdnClientList As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''btnSave control.

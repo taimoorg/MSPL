@@ -9,6 +9,11 @@
 </head>
 <body>
     <style>
+        .GridView:hover {
+            background-color:#5db2ff;
+            color: #ffffff;
+        }
+
         .top_cap {
             background-color: #4789c4;
             font-size: 16pt;
@@ -43,10 +48,16 @@
                 <asp:LinkButton ID="lbAddNew" runat="server">Add New Sku</asp:LinkButton>
                 <br />
                 <br />
+                <b>Client:</b>
+                <asp:DropDownList ID="ddlClientList" runat="server" OnSelectedIndexChanged="ddlClientList_SelectedIndexChanged" AutoPostBack="true" Width="250px">
+                <asp:ListItem Text="Select Client" Value="0"></asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <br />
             </div>
 
             <div style="margin-left: auto; margin-right: auto; width: 90%">
-                <asp:GridView ID="gvData" runat="server"  Width="85%" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX">
+                <asp:GridView ID="gvData" runat="server"  Width="85%" AutoGenerateColumns="false" DataKeyNames="Sku_ID" HeaderStyle-BackColor="#4789c4" HeaderStyle-Height="25PX" RowStyle-CssClass="GridView"  AllowPaging="true"  PageSize="30" >
                     <Columns>
                       <asp:TemplateField>
                           <HeaderStyle HorizontalAlign="Center" Width="20px"/>
@@ -54,7 +65,6 @@
                           <ItemTemplate>
                               <%#CType(Container,GridViewRow).RowIndex + 1 %>
                           </ItemTemplate>
-
                       </asp:TemplateField>
                         <asp:BoundField DataField="SKU" HeaderText="SKU">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
@@ -64,6 +74,10 @@
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
                             <ItemStyle HorizontalAlign="Left" />
                         </asp:BoundField>
+                         <asp:BoundField DataField="Name" HeaderText="Client Name" >
+                            <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
+                            <ItemStyle HorizontalAlign="Left" /> 
+                        </asp:BoundField >
                         <asp:BoundField DataField="SumUPWeight" HeaderText="Sum UP Weight">
                             <HeaderStyle HorizontalAlign="Center" Font-Size="Medium" ForeColor="White" />
                             <ItemStyle HorizontalAlign="Left" />
@@ -97,6 +111,10 @@
 
             <br />
             <table style="margin-left: auto; margin-right: auto">
+                 <tr>
+                    <td>Client:</td>
+                    <td> <asp:DropDownList ID="ddlClient" runat="server" Width="250px"></asp:DropDownList></td>
+                </tr>
                 <tr>
                     <td>Sku:</td>
                     <td>
@@ -128,6 +146,7 @@
                     <td>
                         <asp:TextBox ID="txtDepth" runat="server"></asp:TextBox></td>
                     <asp:HiddenField ID="Sku_ID" runat="server" Value="0" />
+                    <asp:HiddenField ID="hdnClientList" runat="server" />
                 </tr>
             </table>
             <br />
