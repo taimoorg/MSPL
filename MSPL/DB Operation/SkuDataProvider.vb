@@ -8,10 +8,10 @@ Public Class SkuDataProvider
         objdatabase = DatabaseFactory.CreateDatabase()
         objdatabase.ExecuteNonQuery("P_Sku_IU", Sku_ID, SKU, Description, SumUPWeight, SumUPHeight, SumUPWidth, SumUPDepth)
     End Sub
-    Public Shared Function P_Sku_GetAll() As DataTable
+    Public Shared Function P_Sku_GetAll(ID As Integer) As DataTable
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
-        Return CType(objDatabase.ExecuteDataSet("P_Sku_GetAll"), DataSet).Tables(0)
+        Return CType(objDatabase.ExecuteDataSet("P_Sku_GetAll", ID), DataSet).Tables(0)
     End Function
     Public Shared Sub P_Sku_Delete(Sku_ID As Integer)
         Dim database As Database
