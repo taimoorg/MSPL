@@ -7,7 +7,6 @@
             MainClinetDropDown()
             ClinetDropDown()
         End If
-
     End Sub
     Private Sub FillGrid(Optional ByVal Client_ID As Integer = 0)
         Dim DT As DataTable
@@ -18,7 +17,8 @@
             Else
                 gvData.DataSource() = DT
                 gvData.DataBind()
-                gvData.Visible = True
+            gvData.Visible = True
+
             End If
     End Sub
     Protected Sub lbAddNew_Click(sender As Object, e As EventArgs) Handles lbAddNew.Click
@@ -36,33 +36,53 @@
                 ddlClient.SelectedIndex = i
             End If
         Next
-
         pnlData.Visible = False
         pnlEdit.Visible = True
-
-
     End Sub
     Protected Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim Duplication As Boolean
+        Dim EditCheck As Boolean
+
         If User Is Nothing Then
             litError.Text = "Not Sku"
             litError.Visible = True
         End If
-        SkuDataProvider.P_Sku_IU(Sku_ID.Value, txtSku.Text, txtDescrp.Text, txtWeight.Text, txtHeight.Text, txtWidth.Text, txtDepth.Text)
-        pnlData.Visible = True
-        pnlEdit.Visible = False
-        litCap.Text = "SKU"
-        FillGrid()
+        Duplication = SkuDataProvider.P_Sku_DuplicationCheck(ddlClient.SelectedValue, Sku_ID.Value, txtSku.Text)
+        If (Sku_ID.Value = 0 And txtSku.Text = "" And Not Duplication) Then
+            SkuDataProvider.P_Sku_IU(Sku_ID.Value, ddlClient.SelectedValue, txtSku.Text, txtDescrp.Text, txtWeight.Text, txtHeight.Text, txtWidth.Text, txtDepth.Text)
+            pnlData.Visible = True
+            pnlEdit.Visible = False
+            litCap.Text = "SKU"
+            FillGrid()
+        ElseIf (Duplication And Sku_ID.Value > 0) Then
+            EditCheck = SkuDataProvider.P_Sku_DuplicationEditCheck(Sku_ID.Value, txtSku.Text)
+            If (EditCheck) Then
+                SkuDataProvider.P_Sku_IU(Sku_ID.Value, ddlClient.SelectedValue, txtSku.Text, txtDescrp.Text, txtWeight.Text, txtHeight.Text, txtWidth.Text, txtDepth.Text)
+                pnlData.Visible = True
+                pnlEdit.Visible = False
+                litCap.Text = "SKU"
+                FillGrid()
+            Else
+                litError.Text = "Record Already Exists"
+                litError.Visible = True
+            End If
+        Else
+            litError.Text = "Duplicate Record Cannot Insert"
+            litError.Visible = True
 
+        End If
     End Sub
     Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         litCap.Text = "SKU"
         pnlData.Visible = True
         pnlEdit.Visible = False
+        litError.Visible = False
     End Sub
     Private Sub EditRecord()
         Dim Dr As DataRow
         Dr = SkuDataProvider.ExecuteSelectSingleRow(String.Format("select * from T_Sku where Sku_ID ='{0}'", Sku_ID.Value))
         txtSku.Text = Dr.Item("SKU")
+        ddlClient.SelectedValue = Dr.Item("CLIENT_ID")
         txtDescrp.Text = Dr.Item("Description")
         txtWeight.Text = Dr.Item("SumUPWeight")
         txtHeight.Text = Dr.Item("SumUPHeight")
@@ -78,7 +98,6 @@
         SkuDataProvider.P_Sku_Delete(Sku_ID.Value)
         FillGrid()
     End Sub
-
     Private Sub gvData_RomCommand(sender As Object, e As GridViewCommandEventArgs) Handles gvData.RowCommand
         If e.CommandName = "CmdEdit" Then
             Sku_ID.Value = gvData.DataKeys(e.CommandArgument).Values(0)
