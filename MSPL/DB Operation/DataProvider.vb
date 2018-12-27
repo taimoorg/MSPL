@@ -3,6 +3,13 @@ Imports Microsoft.Practices.EnterpriseLibrary.Common
 Public Class DataProvider
     Sub New()
     End Sub
+        Public Shared Function P_UserLogin(Name As String, Password As String) As Boolean
+        Dim database As Database
+        database = DatabaseFactory.CreateDatabase()
+        Return CType(database.ExecuteDataSet("P_UserLogin", Name, Password), DataSet).Tables(0).Rows(0).Item(0)
+    End Function
+    
+    
     Public Shared Function P_Department_GetAll() As DataTable
         Dim objDatabase As Database
         objDatabase = DatabaseFactory.CreateDatabase()
